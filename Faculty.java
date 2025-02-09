@@ -1,49 +1,145 @@
+import java.util.ArrayList;
+
 public class Faculty {
-    private String name;
+    private String facultyID;
+    private String firstName;
+    private String secondName;
+    private String email;
+    private String phoneNumber;
     private String department;
-    private double salary;
+    private String position;
+    private String officeLocation;
+    private String hireDate;
+    private boolean availability;
+
+    private ArrayList<String> coursesTaught;
+
+    public Faculty(String facultyID, String firstName, String secondName, String email, String phoneNumber,
+            String department, String position, String officeLocation, String hireDate, boolean availability) {
+        this.facultyID = facultyID;
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.department = department;
+        this.position = position;
+        this.officeLocation = officeLocation;
+        this.hireDate = hireDate;
+        this.availability = availability;
+        this.coursesTaught = new ArrayList<>();
+    }
+
+    public void setFacultyID(String facultyID) {
+        this.facultyID = facultyID;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public void setOfficeLocation(String officeLocation) {
+        this.officeLocation = officeLocation;
+    }
+
+    public void setHireDate(String hireDate) {
+        this.hireDate = hireDate;
+    }
+
+    public void setAvailability(boolean availability) {
+        this.availability = availability;
+    }
 
 
-//Constructor
-public Faculty (String name , String department , double salary){
-    this.name = name;
-    this.department = department;
-    this.salary = salary;
-}
+    public String getFacultyID() {
+        return facultyID;
+    }
 
-//Getter
-public String getDepartment(){
-    return department;
-}
+    public String getFirstName() {
+        return firstName;
+    }
 
-public String getName(){
-    return name;
-}
+    public String getSecondName() {
+        return secondName;
+    }
 
-public double getSalary(){
-    return salary;
-}
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public String getOfficeLocation() {
+        return officeLocation;
+    }
+
+    public String getHireDate() {
+        return hireDate;
+    }
+
+    public boolean setAvailability() {
+        return availability;
+    }
 
 
-//Setter
-public void setName(String name){
-    this.name=name;
-}
-public void setDepartment(String department){
-    this.department=department;
-}
-public void setSalary(double salary){
-    this.salary=salary;
-}
+    public void displayFacultyInfo() {
+        System.out.println("-------------------------------------------------------------------");
+        System.out.println("Faculty ID: " + facultyID);
+        System.out.println("Name: " + firstName + " " + secondName);
+        System.out.println("Email: " + email);
+        System.out.println("Phone: " + phoneNumber);
+        System.out.println("Department: " + department);
+        System.out.println("Position: " + position);
+        System.out.println("Office Location: " + officeLocation);
+        System.out.println("Hire Date: " + hireDate);
+        System.out.println("Available: " + (availability ? "Yes" : "No"));
+        System.out.println("-------------------------------------------------------------------");
+    }
 
-public void displayInfo (){
-   System.out.println("Faculty Name:" + name);
-   System.out.println("Department:"+ department);
-   System.out.println("Salary: $" + salary);
+    public void changeAvailabilityStatus(boolean status){
+        this.availability = status;
+        if(availability == true){
+            System.out.printf("%s %s %s is now available\n", this.position, this.firstName, this.secondName);
+        }
+        else{
+            System.out.printf("%s %s %s is now available\n", this.position, this.firstName, this.secondName);
+        }
+    }
+    public void assignCourse(String courseName) {
+        if (!coursesTaught.contains(courseName)) {
+            coursesTaught.add(courseName);
+            System.out.println("\"" + courseName + "\" has been assigned to " + this.firstName + " " + this.secondName);
+        } else {
+            System.out.println(this.firstName + " " + this.secondName + " is already assigned to \"" + courseName+"\"");
+        }
+    } 
 }
-public static void main (String[] args) {
-  Faculty faculty1 = new Faculty("Dr. Noam Chomsky", "Linguistics", 500000);
-  faculty1.displayInfo();
-}
-}
-
