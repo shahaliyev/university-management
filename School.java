@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 class School {
     String name;
     String program;
@@ -5,7 +7,7 @@ class School {
     String headOfDepartment;
     String campus; 
 
-    School(String name, String[] programs, int totalStudents, String headOfDepartment, String campus) {
+    School(String name, String string, int totalStudents, String headOfDepartment, String campus) {
         this.name = name;
         this.program = program;
         this.totalStudents = totalStudents;
@@ -13,12 +15,24 @@ class School {
         this.campus = campus;
     }
 
-    public void displayInfo() {
-        System.out.println("School: " + name);
-        System.out.println("Program: " + program);
-        System.out.println("Total Students: " + totalStudents);
-        System.out.println("Head of Department: " + headOfDepartment);
-        System.out.println("Campus: " + campus);  
-    }
 
+    public String toString() {
+        return "School: " + name + 
+               "\nProgram: " + program + 
+               "\nTotal Students: " + totalStudents + 
+               "\nHead of Department: " + headOfDepartment + 
+               "\nCampus: " + campus + "\n";
+    }
+        public static void main(String[] args) {
+        ArrayList<School> schoolList = new ArrayList<>();
+
+        schoolList.add(new School("Engineering School", "Computer Science", 500, "Dr. Smith", "Main Campus"));
+        schoolList.add(new School("Business School", "Marketing", 300, "Dr. Johnson", "Downtown Campus"));
+        schoolList.add(new School("Medical School", "Nursing", 400, "Dr. Adams", "Health Sciences Campus"));
+
+        for (School school : schoolList) {
+            System.out.println(school); 
+        }
+
+}
 }
