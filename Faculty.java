@@ -1,152 +1,73 @@
-
 import java.util.ArrayList;
+import java.util.List;
 
 public class Faculty {
-    private int facultyID;
-    private String firstName;
-    private String secondName;
+    private final String name;
+    private final String department;
     private String email;
-    private String phoneNumber;
-    private String department;
-    private String position;
-    private String officeLocation;
-    private String hireDate;
-    private boolean availability;
+    private final List<String> courses;
 
-    private ArrayList<String> coursesTaught;
-
-    public Faculty(int facultyID, String firstName, String secondName, String email, String phoneNumber,
-            String department, String position, String officeLocation, String hireDate, boolean availability) {
-        this.facultyID = facultyID;
-        this.firstName = firstName;
-        this.secondName = secondName;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
+    public Faculty(String name, String department, String email) {
+        this.name = name;
         this.department = department;
-        this.position = position;
-        this.officeLocation = officeLocation;
-        this.hireDate = hireDate;
-        this.availability = availability;
-        this.coursesTaught = new ArrayList<>();
-    }
-
-    
-
-    public Faculty(int facultyID, String firstName, String secondName) {
-        this.facultyID = facultyID;
-        this.firstName = firstName;
-        this.secondName = secondName;
-    }
-
-
-
-    public void setFacultyID(int facultyID) {
-        this.facultyID = facultyID;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
-    }
-
-    public void setEmail(String email) {
         this.email = email;
+        this.courses = new ArrayList<>();
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void addCourse(String course) {
+        courses.add(course);
     }
 
-    public void setDepartment(String department) {
-        this.department = department;
+    public void removeCourse(String course) {
+        courses.remove(course);
     }
 
-    public void setPosition(String position) {
-        this.position = position;
+    public void displayCourses() {
+        if (courses.isEmpty()) {
+            System.out.println(name + " is not teaching any courses.");
+        } else {
+            System.out.println(name + " is teaching the following courses:");
+            courses.forEach(course -> System.out.println("- " + course));
+        }
     }
 
-    public void setOfficeLocation(String officeLocation) {
-        this.officeLocation = officeLocation;
+    public void updateEmail(String newEmail) {
+        System.out.println("Updating email from " + this.email + " to " + newEmail);
+        this.email = newEmail;
+        System.out.println("Email updated successfully!");
     }
 
-    public void setHireDate(String hireDate) {
-        this.hireDate = hireDate;
+    public void displayFacultyInfo() {
+        System.out.println(this);
     }
-
-    public void setAvailability(boolean availability) {
-        this.availability = availability;
-    }
-
-
-    public int getFacultyID() {
-        return facultyID;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getSecondName() {
-        return secondName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public String getDepartment() {
-        return department;
-    }
-
-    public String getPosition() {
-        return position;
-    }
-
-    public String getOfficeLocation() {
-        return officeLocation;
-    }
-
-    public String getHireDate() {
-        return hireDate;
-    }
-
-    public boolean setAvailability() {
-        return availability;
-    }
-
 
     @Override
     public String toString() {
-        return "Faculty [facultyID=" + facultyID + ", firstName=" + firstName + ", secondName=" + secondName
-                + ", email=" + email + ", phoneNumber=" + phoneNumber + ", department=" + department + ", position="
-                + position + ", officeLocation=" + officeLocation + ", hireDate=" + hireDate + ", availability="
-                + availability + ", coursesTaught=" + coursesTaught + "]";
-    }
-
-
-
-    public void changeAvailabilityStatus(boolean status){
-        this.availability = status;
-        if(availability == true){
-            System.out.printf("%s %s %s is now available\n", this.position, this.firstName, this.secondName);
-        }
-        else{
-            System.out.printf("%s %s %s is now available\n", this.position, this.firstName, this.secondName);
-        }
-    }
-    public void assignCourse(String courseName) {
-        if (!coursesTaught.contains(courseName)) {
-            coursesTaught.add(courseName);
-            System.out.println("\"" + courseName + "\" has been assigned to " + this.firstName + " " + this.secondName);
+        StringBuilder sb = new StringBuilder();
+        sb.append("Faculty Name: ").append(name).append("\n")
+          .append("Department: ").append(department).append("\n")
+          .append("Email: ").append(email).append("\n");
+          
+        if (courses.isEmpty()) {
+            sb.append(name).append(" is not teaching any courses.\n");
         } else {
-            System.out.println(this.firstName + " " + this.secondName + " is already assigned to \"" + courseName+"\"");
+            sb.append(name).append(" is teaching the following courses:\n");
+            courses.forEach(course -> sb.append("- ").append(course).append("\n"));
         }
-    } 
+        return sb.toString();
+    }
+
+    public static void main(String[] args) {
+        Faculty faculty1 = new Faculty("Turkana Aliyeva", "Student Services", "taliyeva13549@ada.edu.az");
+
+        faculty1.addCourse("Data Structures");
+        faculty1.addCourse("Algorithms");
+        System.out.println(faculty1);
+
+        faculty1.removeCourse("Algorithms");
+        System.out.println(faculty1);
+
+        faculty1.updateEmail("turkana.47@mail.ru");
+        System.out.println(faculty1);
+    }
 }
