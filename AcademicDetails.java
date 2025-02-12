@@ -1,4 +1,4 @@
-public class academicDetails {
+public class AcademicDetails {
     // fields
     private String level;
     private String program;
