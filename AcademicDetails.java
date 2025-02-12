@@ -7,7 +7,7 @@ public class AcademicDetails {
     private int catalogYear;
 
     // constructor
-    public academicDetails(String level, String program, String division, String major, int catalogYear){
+    public AcademicDetails(String level, String program, String division, String major, int catalogYear){
         this.level = level;
         this.program = program;
         this.division = division;
