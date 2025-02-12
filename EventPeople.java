@@ -1,9 +1,9 @@
-class EventPeople{
+public class EventPeople {
     Person p;
     int seatNumber;
 
-    public EventPeople(Person P, int seatNumber){
+    public EventPeople(Person p, int seatNumber) {
         this.p = p;
         this.seatNumber = seatNumber;
     }
-} 
+}
