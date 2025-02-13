@@ -7,6 +7,7 @@ public class Course {
     private int minCredits;
     Degree degree;
     private boolean status;
+    
 
 
     public void setStatus(boolean status) {
