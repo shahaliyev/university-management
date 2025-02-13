@@ -12,9 +12,6 @@ public class Department {
         this.programs = programs;
     }
 
-
-
-
     public Department(String title, String dean) {
         this.title = title;
         this.dean = dean;

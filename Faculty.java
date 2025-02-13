@@ -8,26 +8,28 @@ public class Faculty {
     private String email;
     private String phoneNumber;
     private String department;
-    private String position;
+    private String[] position;
     private String officeLocation;
     private String hireDate;
     private boolean availability;
+    private String[] education;
 
     private ArrayList<String> coursesTaught;
 
     public Faculty(int facultyID, String firstName, String secondName, String email, String phoneNumber,
-            String department, String position, String officeLocation, String hireDate, boolean availability) {
+            String department,int positionCount, String[] position, String officeLocation, String hireDate, boolean availability,String[] education,int educationLevel) {
         this.facultyID = facultyID;
         this.firstName = firstName;
         this.secondName = secondName;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.department = department;
-        this.position = position;
+        this.position = new String[positionCount];
         this.officeLocation = officeLocation;
         this.hireDate = hireDate;
         this.availability = availability;
         this.coursesTaught = new ArrayList<>();
+        this.education=new String[educationLevel];
     }
 
     
@@ -64,7 +66,7 @@ public class Faculty {
         this.department = department;
     }
 
-    public void setPosition(String position) {
+    public void setPosition(String[] position) {
         this.position = position;
     }
 
@@ -78,6 +80,9 @@ public class Faculty {
 
     public void setAvailability(boolean availability) {
         this.availability = availability;
+    }
+    public void setEducation(String[] education) {
+        this.education = education;
     }
 
 
@@ -105,7 +110,7 @@ public class Faculty {
         return department;
     }
 
-    public String getPosition() {
+    public String[] getPosition() {
         return position;
     }
 
@@ -120,17 +125,29 @@ public class Faculty {
     public boolean setAvailability() {
         return availability;
     }
-
-
-    @Override
-    public String toString() {
-        return "Faculty [facultyID=" + facultyID + ", firstName=" + firstName + ", secondName=" + secondName
-                + ", email=" + email + ", phoneNumber=" + phoneNumber + ", department=" + department + ", position="
-                + position + ", officeLocation=" + officeLocation + ", hireDate=" + hireDate + ", availability="
-                + availability + ", coursesTaught=" + coursesTaught + "]";
+    public String[] getEducation() {
+        return education;
     }
 
 
+@Override
+public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("Faculty [facultyID=").append(facultyID)
+      .append(", firstName=").append(firstName)
+      .append(", secondName=").append(secondName)
+      .append(", email=").append(email)
+      .append(", phoneNumber=").append(phoneNumber)
+      .append(", department=").append(department)
+      .append(", position=").append(position)
+      .append(", officeLocation=").append(officeLocation)
+      .append(", hireDate=").append(hireDate)
+      .append(", availability=").append(availability)
+      .append(", coursesTaught=").append(coursesTaught)
+      .append(", education=").append(education)
+      .append("]");
+    return sb.toString();
+}
 
     public void changeAvailabilityStatus(boolean status){
         this.availability = status;
