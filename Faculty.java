@@ -56,18 +56,6 @@ public class Faculty {
         }
         return sb.toString();
     }
-
-    public static void main(String[] args) {
-        Faculty faculty1 = new Faculty("Turkana Aliyeva", "Student Services", "taliyeva13549@ada.edu.az");
-
-        faculty1.addCourse("Data Structures");
-        faculty1.addCourse("Algorithms");
-        System.out.println(faculty1);
-
-        faculty1.removeCourse("Algorithms");
-        System.out.println(faculty1);
-
-        faculty1.updateEmail("turkana.47@mail.ru");
-        System.out.println(faculty1);
-    }
 }
+
+
