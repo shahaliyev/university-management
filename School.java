@@ -1,24 +1,13 @@
-class School {
-    String name;
-    String program;
-    int totalStudents;
-    String headOfDepartment;
-    String campus; 
+public class School {
+    String schoolMajor;
+    String location;
+    int tuitionFees;
+    boolean isActive;
 
-    School(String name, String[] programs, int totalStudents, String headOfDepartment, String campus) {
-        this.name = name;
-        this.program = program;
-        this.totalStudents = totalStudents;
-        this.headOfDepartment = headOfDepartment;
-        this.campus = campus;
+    public School(String schoolMajor, String location, int tuitionFees, boolean isActive) {
+        this.schoolMajor = schoolMajor;
+        this.location = location;
+        this.tuitionFees = tuitionFees;
+        this.isActive = isActive;
     }
-
-    public void displayInfo() {
-        System.out.println("School: " + name);
-        System.out.println("Program: " + program);
-        System.out.println("Total Students: " + totalStudents);
-        System.out.println("Head of Department: " + headOfDepartment);
-        System.out.println("Campus: " + campus);  
-    }
-
 }
