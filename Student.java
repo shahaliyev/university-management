@@ -1,12 +1,10 @@
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Student extends People {
     private int id;
     private String fullName;
     private String gender;
+    
     private int age;
     private int coursesCovered;
     private double cgpa;
@@ -39,7 +37,7 @@ public class Student extends People {
         this.courses = courses;
         this.phoneNumber = phoneNumber;
     }
-
+    
     public boolean registerCourse(Course course) {
         if (courses == null) {
             throw new IllegalStateException("Courses list is not initialized.");
@@ -52,7 +50,7 @@ public class Student extends People {
         }
         return checker;
     }
-
+    
     public boolean withdrawFromCourse(Course course) {
         if (courses == null) {
             throw new IllegalStateException("Courses list is not initialized.");
@@ -65,24 +63,30 @@ public class Student extends People {
         }
         return checker;
     }
-
+    
     // Add Course
+    public String getGender() {
+        return gender;
+    }
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
     public int getId() {
         return id;
     }
-
+    
     public void setId(int id) {
         this.id = id;
     }
-
+    
     public String getFullName() {
         return fullName;
     }
-
+    
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
-
+    
     public List<String> getSubjects() {
         return subjects;
     }
@@ -113,7 +117,6 @@ public class Student extends People {
         return false;
     }
 
-    // Withdraw from Course
     public boolean withdrawFromCourse(int courseId) {
         boolean removed = courses.removeIf(course -> course.getCourseCode() == courseId);
         if (removed) {
@@ -132,7 +135,6 @@ public class Student extends People {
         this.coursesCovered = coursesCovered;
     }
 
-    // Update Semester
     public void updateSemester(double[] grades) {
         if (grades == null || grades.length == 0) {
             System.out.println("No grades provided.");
@@ -149,7 +151,6 @@ public class Student extends People {
         this.semester++;
     }
 
-    // Getters & Setters
     public double getCgpa() {
         return cgpa;
     }

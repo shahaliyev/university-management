@@ -11,7 +11,7 @@ public class Staff {
         this.name = name;
         this.department = department;
         this.salary = 0.0;
-        this.assignedRooms = new ArrayList<>(); // Fix: Initialize list
+        this.assignedRooms = new ArrayList<>();
     }
 
     public Staff(String name, String department, double salary, String status, String role, String email, String phoneNumber, String officeNumber) {
@@ -25,18 +25,14 @@ public class Staff {
         this.officeNumber = officeNumber;
         this.assignedRooms = new ArrayList<>();
     }
-
-    // ✅ Getter for Name
+    
     public String getName() {
         return (name == null || name.isEmpty()) ? "Not Set" : name;
     }
-
-    // ✅ Getter for Department
     public String getDepartment() {
         return (department == null || department.isEmpty()) ? "Not Set" : department;
     }
 
-    // ✅ Getter for Salary
     public double getSalary() {
         if (salary <= 0) {
             throw new IllegalArgumentException("Salary must be a positive value.");
