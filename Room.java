@@ -125,18 +125,6 @@ public class Room {
         this.status = status;
     }
 
-    public String toString() {
-        return "Room{" +
-                "ID=" + ID +
-                ", name='" + name + '\'' +
-                ", loc='" + loc + '\'' +
-                ", type=" + type +
-                ", dimension=" + dimension + 
-                ", eq=" + formatEquipment() +
-                ", status=" + (status ? "Available" : "Occupied") +
-                '}';
-    }
-
     public void addEquipment(Equipment equipment) {
         if (!eq.contains(equipment)) {
             eq.add(equipment);
@@ -192,11 +180,6 @@ public class Room {
     }
 
     public void setEq(ArrayList<Equipment> eq) {
-    public ArrayList <Equipment> getEq() {
-        return eq;
-    }
-
-    public void setEq(ArrayList <Equipment> eq) {
         this.eq = eq;
     }
 

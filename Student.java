@@ -4,39 +4,43 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Student extends People {
+    private int id;
+    private String fullName;
+    private String gender;
+    private int age;
+    private int coursesCovered;
     private double cgpa;
     private String major;
     private List<String> subjects;
     private String email;
     private boolean onProbation;
-    private double[] gpas = new double[12];
     private int semester = 1;
     private List<Course> courses;
-    private double gpa;
-    private String email;
-    private List<String> courses;
-    private int age;
-    private String firstname;
-    private String lastname;
-    private double newgpa;
     private String phoneNumber;
-    private double overallGpa;
 
-    public Student(String name, int id, int coursesCovered, double cgpa, String major, List<String> subjects, boolean onProbation, int semester) {
+    public Student(String fullName, String gender, int age, int id, int coursesCovered, double cgpa, String major,
+            List<String> subjects, String email, boolean onProbation, int semester, List<Course> courses,
+            String phoneNumber) {
+        super(fullName, gender, phoneNumber, email, id, age);
         if (id < 0 || cgpa < 0 || coursesCovered < 0) {
             throw new IllegalArgumentException("Negative values are not allowed for ID, CGPA, or coursesCovered.");
         }
-        this.name = name;
+        this.fullName = fullName;
+        this.gender = gender;
+        this.age = age;
         this.id = id;
         this.coursesCovered = coursesCovered;
         this.cgpa = cgpa;
-
-    public Student(String name, int id) {
-        this.name = name;
-        this.id = id;
+        this.major = major;
+        this.subjects = subjects;
+        this.email = email;
+        this.onProbation = onProbation;
+        this.semester = semester;
+        this.courses = courses;
+        this.phoneNumber = phoneNumber;
     }
 
-    public boolean addCourse(Course course) {
+    public boolean registerCourse(Course course) {
         if (courses == null) {
             throw new IllegalStateException("Courses list is not initialized.");
         }
@@ -61,15 +65,44 @@ public class Student extends People {
         }
         return checker;
     }
-      
-    public void updateSemester(double[] grades) {
-        if (grades == null || grades.length == 0) {
-            throw new IllegalArgumentException("Grades array is empty or null.");
-        }
-    }
-
 
     // Add Course
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public List<String> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(List<String> subjects) {
+        this.subjects = subjects;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     public boolean addCourse(Course course) {
         if (course != null) {
             courses.add(course);
@@ -91,23 +124,6 @@ public class Student extends People {
         return false;
     }
 
-    // Calculate GPA
-    public double calculateGPA() {
-        if (courses.isEmpty()) {
-            System.out.println("No courses enrolled. GPA is 0.0");
-            return 0.0;
-        }
-
-        double totalPoints = 0;
-        for (Course course : courses) {
-            totalPoints += course.getcredits();  //find the credit of course
-        }
-        double gpa = totalPoints / courses.size();
-        this.gpas[this.semester - 1] = gpa; // Store GPA for the current semester
-        return gpa;
-    }
-
-
     public int getCoursesCovered() {
         return coursesCovered;
     }
@@ -128,53 +144,64 @@ public class Student extends People {
             newGpa += grade;
         }
         newGpa /= grades.length;
-
-        this.gpas[this.semester - 1] = newGpa;
         this.cgpa = (this.cgpa * semester + newGpa) / (semester + 1);
         this.onProbation = this.cgpa < 2.5 && newGpa < 2.5;
         this.semester++;
     }
 
     // Getters & Setters
-    public double getCgpa() { return cgpa; }
-    public void setCgpa(double cgpa) { this.cgpa = cgpa; }
+    public double getCgpa() {
+        return cgpa;
+    }
 
-    public String getMajor() { return major; }
-    public void setMajor(String major) { this.major = major; }
+    public void setCgpa(double cgpa) {
+        this.cgpa = cgpa;
+    }
 
-    public List<Course> getCourses() { return courses; }
-    public void setCourses(List<Course> courses) { this.courses = courses; }
+    public String getMajor() {
+        return major;
+    }
 
-    public boolean isOnProbation() { return onProbation; }
-    public void setOnProbation(boolean onProbation) { this.onProbation = onProbation; }
+    public void setMajor(String major) {
+        this.major = major;
+    }
 
-    public double[] getGpas() { return gpas; }
-    public void setGpas(double[] gpas) { this.gpas = gpas; }
+    public List<Course> getCourses() {
+        return courses;
+    }
 
-    public int getSemester() { return semester; }
-    public void setSemester(int semester) { this.semester = semester; }
-      
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
+
+    public boolean isOnProbation() {
+        return onProbation;
+    }
+
+    public void setOnProbation(boolean onProbation) {
+        this.onProbation = onProbation;
+    }
+
+    public int getSemester() {
+        return semester;
+    }
+
+    public void setSemester(int semester) {
+        this.semester = semester;
+    }
+
     public void setAge(int age) {
         if (age > 0) {
             this.age = age;
         }
     }
-    public int getAge(){
+
+    public int getAge() {
         return age;
     }
 
     public String getEmail() {
         return email;
-    }
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public String toString() {
-        return "Student [cgpa=" + cgpa + ", major=" + major + ", courses=" + courses + ", onProbation=" + onProbation
-                + ", gpas=" + Arrays.toString(gpas) + ", semester=" + semester + ", getFullName()=" + getFullName()
-                + ", getEmail()=" + getEmail() + ", getID()=" + getId() + "]";
     }
 
 }
