@@ -1,4 +1,3 @@
-
 import java.util.List;
 
 public class Student extends Person {
@@ -13,7 +12,7 @@ public class Student extends Person {
     private int semester = 1;
 
     Student(String name, int id, int coursesCovered, double cgpa, String major, List<String> subjects, boolean onProbation, int semester) {
-        if (id < 0|| cgpa < 0 || coursesCovered < 0) {
+        if (id < 0 || cgpa < 0 || coursesCovered < 0) {
             System.out.println("Negative values are not allowed for ID, GPA, CGPA, or coursesCovered.");
         }
         this.name = name;
@@ -31,7 +30,7 @@ public class Student extends Person {
         this.id = id;
     }
 
-    public void GetStudentInfo(){
+    public void GetStudentInfo() {
         System.out.println("Name: " + this.name +
         "\nId: " + this.id +
         "\nGPA: " + this.gpa +
@@ -42,30 +41,30 @@ public class Student extends Person {
         for (Course course : this.courses) {
             System.out.println("\n_________________\n");
             course.GetCourse();
-            
         }
-}
-    
-    public boolean AddCourse(Course course){
-        boolean checker = this.courses.add(course);
-        if(checker){
-            System.out.println("Course added succcesfully!!");
-            return checker;
-        }
-        System.err.println("Error occured((");
-        return checker;
+    }
 
-    }
-    public boolean withdrawFromCourse(int id){
-        boolean checker = this.courses.removeIf((course)-> course.getId() == id);
-        if(checker){
-            System.out.println("Course deleted succcesfully!!");
+    public boolean AddCourse(Course course) {
+        boolean checker = this.courses.add(course);
+        if (checker) {
+            System.out.println("Course added successfully!!");
             return checker;
         }
-        System.err.println("Error occured((");
+        System.err.println("Error occurred((");
         return checker;
     }
-    public float CalculateGPA(){
+
+    public boolean withdrawFromCourse(int id) {
+        boolean checker = this.courses.removeIf((course) -> course.getId() == id);
+        if (checker) {
+            System.out.println("Course deleted successfully!!");
+            return checker;
+        }
+        System.err.println("Error occurred((");
+        return checker;
+    }
+
+    public float CalculateGPA() {
         int size = this.courses.size();
         float overallGpa = 0;
         for (Course course : this.courses) {
@@ -73,16 +72,32 @@ public class Student extends Person {
         }
         overallGpa = overallGpa / (float) size;
         return overallGpa;
+    }
 
     public void setAge(int age) {
         if (age > 0) { 
             this.age = age;
+        }
+    }
 
     public void updateSemester(double[] grades) {
         if (grades == null || grades.length == 0) {
             System.out.println("Grades array is empty or null.");
             return;
         }
+
+        double newGpa = 0;
+        for (double grade : grades) {
+            newGpa += grade;
+        }
+        newGpa /= grades.length;
+
+        this.gpas[this.semester - 1] = newGpa;
+        this.cgpa = (this.cgpa * this.coursesCovered + newGpa * grades.length) / (this.coursesCovered + grades.length);
+        this.coursesCovered += grades.length;
+        this.onProbation = this.cgpa < 2.5 && newGpa < 2.5;
+
+        System.out.println("Updated GPA for semester " + this.semester + ": " + newGpa);
     }
 
     public String getEmail() {
@@ -118,7 +133,7 @@ public class Student extends Person {
     public boolean isHonorStudent() {
         return gpa >= 3.5;
     }
-    
+
     public void displayStudentInfo() {
         System.out.println("Student ID: " + studentId);
         System.out.println("Name: " + getFirstName()); 
@@ -134,10 +149,25 @@ public class Student extends Person {
         this.onProbation = this.cgpa < 2.5 && this.gpas[this.semester] < 2.5;
     }
 
-
-
+    @Override
     public String toString() {
-        return "Name: " + this.name + " CGPA: " + this.cgpa;
+        StringBuilder studentInfo = new StringBuilder();
+        studentInfo.append("Name: ").append(this.name).append(" CGPA: ").append(this.cgpa).append("\n");
+        studentInfo.append("Courses Covered: ").append(this.coursesCovered).append("\n");
+        studentInfo.append("Major: ").append(this.major).append("\n");
+        studentInfo.append("Current Semester: ").append(this.semester).append("\n");
+        studentInfo.append("Subjects: ").append(String.join(", ", this.subjects)).append("\n");
+        studentInfo.append("GPA by Semester: \n");
+        
+        for (int i = 0; i < this.gpas.length; i++) {
+            if (this.gpas[i] != 0) {
+                studentInfo.append("Semester ").append(i + 1).append(": ").append(this.gpas[i]).append("\n");
+            }
+        }
+
+        studentInfo.append("On Probation: ").append(this.onProbation ? "Yes" : "No").append("\n");
+        
+        return studentInfo.toString();
     }
 
     public String getName() {
@@ -155,7 +185,6 @@ public class Student extends Person {
     public void setId(int id) {
         this.id = id;
     }
-
 
     public int getCoursesCovered() {
         return coursesCovered;
@@ -210,7 +239,6 @@ public class Student extends Person {
     }
 
     public void setSemester(int semester) {
-        this.semester = semester;
         this.semester = semester;
     }
 }
