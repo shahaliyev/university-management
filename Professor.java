@@ -17,7 +17,7 @@ public class Professor extends Faculty {
         super(facultyID, firstName, secondName);
 
     }
-
+        
     public void teachCourse(String course) {
         if (course != null && !course.isEmpty()) {
             coursesTaught.add(course);
